@@ -1,0 +1,141 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style.css"/>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+    <!-- begin SnapEngage code -->
+    <script type="text/javascript">
+        (function() {
+            var se = document.createElement('script'); se.type = 'text/javascript'; se.async = true;
+            se.src = '//storage.googleapis.com/code.snapengage.com/js/e7ae33a8-ac56-4bc7-bb62-7dda5315cb35.js';
+            var done = false;
+            se.onload = se.onreadystatechange = function() {
+                if (!done&&(!this.readyState||this.readyState==='loaded'||this.readyState==='complete')) {
+                    done = true;
+                    /* Place your SnapEngage JS API code below */
+                    SnapEngage.setUserEmail('bumurzaqov@mail.ru');
+
+                    SnapEngage.setProactiveAutocloseDelay(0);
+                    SnapEngage.openProactiveChat(true, true);
+
+                    SnapEngage.setCallback('OpenProactive', function(status) {
+                        hideSteps();
+                        step2();
+                    });
+
+                    SnapEngage.setCallback('Open', function(status) {
+                        hideSteps();
+                        step2();
+                    });
+
+                    SnapEngage.setCallback('StartChat', function(email, msg, type) {
+                        hideSteps();
+                        step3();
+                    });
+
+                    SnapEngage.setCallback('ChatMessageReceived', function(agent, msg) {
+                        //clear the cookies after each message to ensure the chat window doesn't follow the
+                        //user if they should happen to wander back to main site or into the Configurator
+                        // $.post( "/request/v1/newEntry", JSON.stringify(agent) );
+                        SnapEngage.clearAllCookies();
+
+                        hideSteps();
+                        step4();
+                    });
+
+                    SnapEngage.setCallback('ChatMessageSent', function(msg) {
+                        //clear the cookies after each message to ensure the chat window doesn't follow the
+                        //user if they should happen to wander back to main site or into the Configurator
+                        SnapEngage.clearAllCookies();
+                    });
+
+                    SnapEngage.setCallback('Close', function(type, status) {
+                        hideSteps();
+                        step1();
+                    });
+                }
+            };
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(se, s);
+        })();
+    </script>
+    <!-- end SnapEngage code -->
+</head>
+<body>
+<h1>SnapEngage DEMO</h1>
+<table th:if="${not #lists.isEmpty(entries)}" class="table table-bordered table-striped">
+    <tr>
+        <th>#</th>
+        <th>idOfRequest</th>
+        <th>widgetId</th>
+        <th>url</th>
+        <th>snapshotImageUrl</th>
+        <th>type</th>
+        <th>requestedBy</th>
+        <th>description</th>
+        <th>createdAtDate</th>
+        <th>createdAtSeconds</th>
+        <th>createdAtMilliseconds</th>
+        <th>proactiveChat</th>
+        <th>pageUrl</th>
+        <th>referrerUrl</th>
+        <th>entryUrl</th>
+        <th>ipAddress</th>
+        <th>userAgent</th>
+        <th>browser</th>
+        <th>os</th>
+        <th>countryCode</th>
+        <th>country</th>
+        <th>region</th>
+        <th>city</th>
+        <th>latitude</th>
+        <th>longitude</th>
+        <th>sourceId</th>
+        <th>chatWaittime</th>
+        <th>chatDuration</th>
+        <th>languageCode</th>
+    </tr>
+    <tr th:each="entry : ${entries}">
+        <td><a th:href="${ '/request/' + entry.id}">View</a></td>
+        <td th:text="${entry.idOfRequest}"></td>
+        <td th:text="${entry.widgetId}"></td>
+        <td th:text="${entry.url}"></td>
+        <td th:text="${entry.snapshotImageUrl}"></td>
+        <td th:text="${entry.type}"></td>
+        <td th:text="${entry.requestedBy}"></td>
+        <td th:text="${entry.description}"></td>
+        <td th:text="${entry.createdAtDate}"></td>
+        <td th:text="${entry.createdAtSeconds}"></td>
+        <td th:text="${entry.createdAtMilliseconds}"></td>
+        <td th:text="${entry.proactiveChat}"></td>
+        <td th:text="${entry.pageUrl}"></td>
+        <td th:text="${entry.referrerUrl}"></td>
+        <td th:text="${entry.entryUrl}"></td>
+        <td th:text="${entry.ipAddress}"></td>
+        <td th:text="${entry.userAgent}"></td>
+        <td th:text="${entry.browser}"></td>
+        <td th:text="${entry.os}"></td>
+        <td th:text="${entry.countryCode}"></td>
+        <td th:text="${entry.country}"></td>
+        <td th:text="${entry.region}"></td>
+        <td th:text="${entry.city}"></td>
+        <td th:text="${entry.latitude}"></td>
+        <td th:text="${entry.longitude}"></td>
+        <td th:text="${entry.sourceId}"></td>
+        <td th:text="${entry.chatWaittime}"></td>
+        <td th:text="${entry.chatDuration}"></td>
+        <td th:text="${entry.languageCode}"></td>
+    </tr>
+</table>
+
+</body>
+</html>

@@ -17,7 +17,7 @@ Test project to create Snapengage endpoint. Chat model has been installed to a w
 
 - Clone repository.
 Sh
-$ Git clone https://github.com/Boburmirzo/EndpointChatDataParsing.git
+$ Git clone https://github.com/Boburmirzo/EndpointChatDataParser.git
 (I.e.
 - Build with maven.
 Sh
